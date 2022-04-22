@@ -1,7 +1,9 @@
+import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
+import { TransactionContext } from "../context/TransactionContext";
 import { Loader } from "./";
 
 // 추가메뉴 디자인
@@ -20,6 +22,9 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
   );
 
 const Welcome = () => {
+    //TransactionContext.jsx 파일의 Provider에서 값을 가져옴
+    const {value} = useContext(TransactionContext);
+
     // 지갑연결 이벤트
     const connectWallet =() => {
 
