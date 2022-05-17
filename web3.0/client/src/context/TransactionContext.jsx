@@ -22,17 +22,85 @@ const getEthereumContract = () => {
     });
   };
 
-  export const TransactionsProvider = ({ children }) =>{
+//export data
+export const TransactionsProvider = ({ children }) =>{
+    //useState필드 설정
+    const [currentAccount, setCurrentAccount] = useState('');
+    const [formData, setformData] = useState({ addressTo: "", amount: "", keyword: "", message: "" });
 
-    const checkIfWalletIsConnected = async () => (
-        if (!ethereum) return alert("Please install MetaMask.");
+    // 이벤트 핸들 변경
+    // Welcome 화면 이더리움 카드의 계좌, 잔고, 메세지 등 정보 전달 및 동적 업데이트
+    const handleChange = (e, name) => {
+        //이전상태 => 값
+        setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
+      };
 
-        const accounts = await ethereum.request({ method: "eth_requestAccounts", });
 
-    )
+    //지갑 연결여부 확인
+    const checkIfWalletIsConnected = async () => {
+
+        try {
+            if(!ethereum) return alert("Please install MetaMask.");
+
+            const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+            
+            if(accounts.length){
+                setCurrentAccount(accounts[0]);
+                //getAllTransaction
+            }else{
+                console.log('No accounts found')
+            }
+            console.log(accounts);
+
+        } catch (error) {
+            console.log(error);
+            throw new Error("No ethereum object");
+        }  
+    }
+
+    const sendTransaction = async () => {
+        try {
+            if(!ethereum) return alert("Please install MetaMask.");
+
+            //get the data from the form
+
+        } catch (error) {
+            console.log(error);
+            throw new Error("No ethereum object");
+        }  
+        
+      };
+
+    //지갑연결
+    const connectWallet = async () => {
+        try {
+          if (!ethereum) return alert("Please install MetaMask.");
+    
+          const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+            
+          
+          //첫번쨰 계정 연결
+          setCurrentAccount(accounts[0]);
+          //window.location.reload();
+        } catch (error) {
+          console.log(error);
+    
+          throw new Error("No ethereum object");
+        }
+    }
+
+    useEffect(() => {
+            checkIfWalletIsConnected();
+        }, []);
+
     return (
-        <TransactionContext.Provider value= {{ value : 'test'}} >
+        //지갑연결 값
+        <TransactionContext.Provider value= {{ 
+            connectWallet , currentAccount, formData, setformData, handleChange
+            }} >
+            
             {children}
         </TransactionContext.Provider>
       );
+
   };
