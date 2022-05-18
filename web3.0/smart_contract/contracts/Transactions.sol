@@ -39,3 +39,26 @@ contract Transactions {
     }
 
 }
+
+
+/* transactionContract 에서 사용가능한 함수 정리
+addToBlockchain: ƒ (...args)
+addToBlockchain(address,uint256,string,string): ƒ (...args)
+address: "0xB80Ff80f98e25F023EF85175e61aAff7a5337Fe6"
+callStatic: {addToBlockchain(address,uint256,string,string): ƒ, getAllTransactions(): ƒ, getTransactionCount(): ƒ, addToBlockchain: ƒ, getAllTransactions: ƒ, …}
+estimateGas: {addToBlockchain(address,uint256,string,string): ƒ, getAllTransactions(): ƒ, getTransactionCount(): ƒ, addToBlockchain: ƒ, getAllTransactions: ƒ, …}
+filters: {Transfer(address,address,uint256,string,uint256,string): ƒ, Transfer: ƒ}
+functions: {addToBlockchain(address,uint256,string,string): ƒ, getAllTransactions(): ƒ, getTransactionCount(): ƒ, addToBlockchain: ƒ, getAllTransactions: ƒ, …}
+getAllTransactions: ƒ (...args)
+getAllTransactions(): ƒ (...args)
+getTransactionCount: ƒ (...args)
+getTransactionCount(): ƒ (...args)
+interface: Interface {fragments: Array(4), _abiCoder: AbiCoder, functions: {…}, errors: {…}, events: {…}, …}
+populateTransaction: {addToBlockchain(address,uint256,string,string): ƒ, getAllTransactions(): ƒ, getTransactionCount(): ƒ, addToBlockchain: ƒ, getAllTransactions: ƒ, …}
+provider: Web3Provider {_isProvider: true, _events: Array(0), _emitted: {…}, disableCcipRead: false, formatter: Formatter, …}
+resolvedAddress: Promise {<fulfilled>: '0xB80Ff80f98e25F023EF85175e61aAff7a5337Fe6'}
+signer: JsonRpcSigner {_isSigner: true, provider: Web3Provider, _index: 0, _address: null}
+_runningEvents: {}
+_wrappedEmits: {}
+[[Prototype]]: BaseContract
+*/

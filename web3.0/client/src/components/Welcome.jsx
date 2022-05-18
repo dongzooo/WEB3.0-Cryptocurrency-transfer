@@ -24,12 +24,10 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 const Welcome = () => {
     //TransactionContext.jsx 파일의 Provider에서 값을 가져옴
     // 지갑연결 이벤트
-    const {connectWallet, currentAccount, formData, setformData, handleChange} = useContext(TransactionContext);
+    const {connectWallet, currentAccount, formData, sendTransaction, handleChange} = useContext(TransactionContext);
 
-  
-    
-
-    const handleSubmit =() => {
+    //전송 버튼 submit 클릭시 이벤트
+    const handleSubmit =(e) => {
         const { addressTo, amount,  keyword, message} = formData;
         e.preventDefault();
         //값이 빈경우 리턴

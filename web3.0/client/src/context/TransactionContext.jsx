@@ -14,12 +14,13 @@ const getEthereumContract = () => {
     const signer = provider.getSigner();
     //(0xB80Ff80f98e25F023EF85175e61aAff7a5337Fe6, Transacion.json, signer)
     const transactionContract = new ethers.Contract(contractAddress, contractABI, signer);
-  
-    console.log({
-        provider,
-        signer,
-        transactionContract
-    });
+
+    return transactionContract;
+    // console.log({
+    //     provider,
+    //     signer,
+    //     transactionContract
+    // });
   };
 
 //export data
@@ -27,6 +28,9 @@ export const TransactionsProvider = ({ children }) =>{
     //useState필드 설정
     const [currentAccount, setCurrentAccount] = useState('');
     const [formData, setformData] = useState({ addressTo: "", amount: "", keyword: "", message: "" });
+    const [isLoading, setIsLoading] = useState(false);
+    //거래를 localStorage에 저장한다.
+    const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
 
     // 이벤트 핸들 변경
     // Welcome 화면 이더리움 카드의 계좌, 잔고, 메세지 등 정보 전달 및 동적 업데이트
@@ -63,6 +67,35 @@ export const TransactionsProvider = ({ children }) =>{
             if(!ethereum) return alert("Please install MetaMask.");
 
             //get the data from the form
+            const { addressTo, amount,  keyword, message} = formData;
+            const transactionContract = getEthereumContract();
+            //십진수인 값을 이더네트워크에서 사용하기 위해 16진수로 파싱한다
+            const parsedAmount = ethers.utils.parseEther(amount);
+
+            await ethereum.request({
+                method : 'eth_sendTransaction',
+                
+                params :[{
+                    from : currentAccount,
+                    to : addressTo,
+                    gas: "0x5208",//다스한도 설정 : 21000GEWI hex 16진수로 21000이지만 이더리움상에서는 0.000021ETH이다
+                    value : parsedAmount._hex, // 0.00001
+                }]
+            });
+
+            //transaction.sol 파일의 블록체인 구조체의 형태로 전송
+            const transactionHash = await transactionContract.addToBlockchain( addressTo, amount, message, keyword);
+            setIsLoading(true);
+            console.log(`Loading - ${transactionHash.hash}`);
+            await transactionHash.wait();
+            setIsLoading(false);
+            console.log(`Success - ${transactionHash.hash}`);
+            
+            //거래 횟수
+            const transactionsCount = await transactionContract.getTransactionCount();
+
+            setTransactionCount(transactionsCount.toNumber());
+            window.location.reload();
 
         } catch (error) {
             console.log(error);
@@ -96,7 +129,7 @@ export const TransactionsProvider = ({ children }) =>{
     return (
         //지갑연결 값
         <TransactionContext.Provider value= {{ 
-            connectWallet , currentAccount, formData, setformData, handleChange
+            connectWallet , currentAccount, formData, setformData, handleChange, sendTransaction
             }} >
             
             {children}
@@ -104,3 +137,4 @@ export const TransactionsProvider = ({ children }) =>{
       );
 
   };
+
