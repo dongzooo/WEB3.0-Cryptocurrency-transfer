@@ -1,6 +1,5 @@
 import { Navbar, Welcome, Footer, Services, Transactions } from "./components"
 
-
 const App = () => {
   return (
     <div className="min-h-screen">
@@ -15,4 +14,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

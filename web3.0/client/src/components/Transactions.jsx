@@ -6,7 +6,6 @@ import useFetch from "../hooks/useFetch";
 import dummyData from "../utils/dummyData";
 import { shortenAddress } from "../utils/shortenAddress";
 
-
 const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword, amount, url }) => {
     const gifUrl = useFetch({ keyword });
   
@@ -46,9 +45,6 @@ const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword,
                     </div>
             </div>
         </div>
-        
-
-        
 
     );
     
@@ -70,7 +66,7 @@ const Transactions = () => {
             </h3>
           )}
           <div className="flex flex-wrap justify-center items-center mt-10">
-              {dummyData.reverse().map((transaction,i) => (
+              {transactions.reverse().map((transaction,i) => ( //dummydata 대신 tranaction을 넣음
                   <TransactionsCard key={i} {...transaction} />
               ))}
           {/* {[...dummyData, ...transactions].reverse().map((transaction, i) => (

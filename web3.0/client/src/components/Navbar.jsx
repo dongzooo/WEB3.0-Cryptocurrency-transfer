@@ -6,11 +6,12 @@ import logo from "../../images/logo.png";
 
 // li 리스트 데이터 동적으로 반환
 const NavBarItem = ({ title, classprops }) => (
-    <li className={`mx-4 cursor-pointer ${classprops}`}>
+    <li className={`mx-4 cursor-pointer ${classprops}`} id = {title}>
         {title}
     </li>
   );
 
+  
 const Navbar = () => {
     // 토글메뉴설정 flase로 시작
     const [toggleMenu, setToggleMenu] = useState(false);

@@ -31,13 +31,39 @@ export const TransactionsProvider = ({ children }) =>{
     const [isLoading, setIsLoading] = useState(false);
     //거래를 localStorage에 저장한다.
     const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
+    const [transactions, setTransactions] = useState([]);
 
     // 이벤트 핸들 변경
     // Welcome 화면 이더리움 카드의 계좌, 잔고, 메세지 등 정보 전달 및 동적 업데이트
     const handleChange = (e, name) => {
         //이전상태 => 값
         setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
-      };
+    };
+
+
+    const getAllTransactions = async () => {
+        try {
+            if (ethereum) return alert("Please install metamsk");
+            const transactionsContract = getEthereumContract(); //getEthereumContract
+
+            const availableTransactions = await transactionsContract.getTransactions();
+            
+            const structuredTransactions = availableTransactions.map((transaction) => ({
+                addressTo: transaction.receiver,
+                addressFrom: transaction.sender,
+                timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
+                message: transaction.message,
+                keyword: transaction.keyword,
+                amount: parseInt(transaction.amount._hex) / (10 ** 18) //이더리운 단위 계산법
+              }));
+      
+              console.log(structuredTransactions);
+      
+              setTransactions(structuredTransactions);
+        } catch (error){
+            console.log(error);
+        }
+    }
 
 
     //지갑 연결여부 확인
@@ -61,6 +87,22 @@ export const TransactionsProvider = ({ children }) =>{
             throw new Error("No ethereum object");
         }  
     }
+
+    const checkIfTransactionsExists = async () => {
+        try {
+        //   if (ethereum) {
+            const transactionsContract = getEthereumContract();
+            const currentTransactionCount = await transactionsContract.getTransactionCount();
+    
+            window.localStorage.setItem("transactionCount", currentTransactionCount);
+        //   }
+        } catch (error) {
+          console.log(error);
+    
+          throw new Error("No ethereum object");
+        }
+      };
+
 
     const sendTransaction = async () => {
         try {
@@ -124,12 +166,14 @@ export const TransactionsProvider = ({ children }) =>{
 
     useEffect(() => {
             checkIfWalletIsConnected();
+            checkIfTransactionsExists();
         }, []);
 
     return (
         //지갑연결 값
         <TransactionContext.Provider value= {{ 
-            connectWallet , currentAccount, formData, setformData, handleChange, sendTransaction
+            connectWallet , currentAccount, formData, setformData, handleChange, sendTransaction,
+            transactions , isLoading
             }} >
             
             {children}

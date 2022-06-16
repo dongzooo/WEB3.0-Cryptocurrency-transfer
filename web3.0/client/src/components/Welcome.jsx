@@ -25,7 +25,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 const Welcome = () => {
     //TransactionContext.jsx 파일의 Provider에서 값을 가져옴
     // 지갑연결 이벤트
-    const {connectWallet, currentAccount, formData, sendTransaction, handleChange} = useContext(TransactionContext);
+    const {connectWallet, currentAccount, formData, sendTransaction, handleChange,transactions , isLoading} = useContext(TransactionContext);
 
     //전송 버튼 submit 클릭시 이벤트
     const handleSubmit =(e) => {
@@ -114,7 +114,7 @@ const Welcome = () => {
                         <div className="h-[1px] w-full bg-gray-400 my-2" />
 
                         {/* 제출버튼 클릭 이벤트 */}
-                        {false
+                        {isLoading //코인 보낼시 로딩 이벤트
                         ? <Loader />
                         : (
                             <button
