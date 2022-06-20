@@ -1,4 +1,4 @@
-create database web3;
+-- create database web3;
 use web3;
 
 create table tbl_member(
@@ -20,6 +20,6 @@ create table transfer_info(
 
 select * from tbl_member;
 select * from transfer_info;
-drop table transfer_innfo;
-drop table tbl_member;
+-- drop table transfer_innfo;
+-- drop table tbl_member;
 commit;
