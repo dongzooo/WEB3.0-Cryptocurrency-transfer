@@ -1,6 +1,5 @@
-package com.backend.model;
+package com.databaseServer.model;
 
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -36,14 +33,16 @@ public class TransferInfo {
 	@Id
 	//기본키 값을 auto_increment 나 sequence를 이용해서 자동 생성
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long transferid;
+	private Long transactionid;
 	
-	@Column(length=100, nullable = false)
-	private String toaddress;
+	@Column(length=200, nullable = false)
+	private String addressto;
 	@Column
-	private Long amount;
+	private Double amount;
 	@Column(length=200)
 	private String description;
+//	@Column(length=255)
+//	private String pictureurl;
 	
 	//사용을 할 때 데이터를 가져오겠다는 옵션
 	@ManyToOne(fetch=FetchType.LAZY)

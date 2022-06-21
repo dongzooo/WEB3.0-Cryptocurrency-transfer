@@ -1,4 +1,4 @@
-package com.backend.model;
+package com.databaseServer.model;
 
 import java.time.LocalDateTime;
 
@@ -29,6 +29,6 @@ import lombok.ToString;
 public class Member extends BaseEntity{
 	@Id
 	private String name;
-	
 	private LocalDateTime lastlogindate;
+	
 }

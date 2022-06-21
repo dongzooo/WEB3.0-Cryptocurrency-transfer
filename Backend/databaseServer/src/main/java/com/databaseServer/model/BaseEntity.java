@@ -1,4 +1,4 @@
-package com.backend.model;
+package com.databaseServer.model;
 
 import java.time.LocalDateTime;
 
@@ -26,10 +26,10 @@ abstract class BaseEntity {
 	@Column(name="regdate", updatable=false)
 	private LocalDateTime regDate;
 	
-	//마지막 수정 날짜를 이용
-	@LastModifiedDate
-	//테이블에 만들어 질 때는 moddate 라는 컬럼으로 생성
-	@Column(name="moddate")
-	private LocalDateTime modDate;
+//	//마지막 수정 날짜를 이용
+//	@LastModifiedDate
+//	//테이블에 만들어 질 때는 moddate 라는 컬럼으로 생성
+//	@Column(name="moddate")
+//	private LocalDateTime modDate;
 	
 }
