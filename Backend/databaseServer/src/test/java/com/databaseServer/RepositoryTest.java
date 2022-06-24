@@ -51,7 +51,7 @@ public class RepositoryTest {
 	private TransferInfoRepository transferInfoRepository;
 
 	//TransferInfo삽입 테스트
-	@Test
+//	@Test
 	public void testInsertTransferInfo() {
 		//외래키를 생성
 		Member member = Member.builder()
