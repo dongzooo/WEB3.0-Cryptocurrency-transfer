@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.springframework.data.domain.Pageable;
-
 import com.databaseServer.model.TransferInfo;
 
 import lombok.Data;
 
+import org.springframework.data.domain.Pageable;
+
 @Data
-public class PageRequestTransferInfoDTO {
+public class PageResponseTransferInfoDTO {
 	//DTO 리스트
-	private List<TransferInfo> transferInfoList;
+	private List<TransferInfo> itemList;
 	
 	//전체 페이지 개수
 	private int totalPage;
@@ -45,3 +45,6 @@ public class PageRequestTransferInfoDTO {
 	}
 	
 }
+
+
+
