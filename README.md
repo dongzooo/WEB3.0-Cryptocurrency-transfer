@@ -1,11 +1,11 @@
 # WEB3.0-Cryptocurrency-transfer
 WEB 3.0 Project
 
-1. Overciew
+## 1. Overciew
 - Web3.0 환경에서 이더리움을 전송하는 웹사이트
 - 메타마스크를 통해 로그인하고, 암호화폐를 전송함
 
-2. UI Interface
+## 2. UI Interface
 <br>
 
 ![image](https://user-images.githubusercontent.com/40832965/187368151-e9000d10-7234-4e71-ba4a-ab29a82f84c7.png)
@@ -29,9 +29,12 @@ WEB 3.0 Project
 - 메타마스크 전송
 
 <br>
-3. Requirements
+
+## 3. Requirements
 
 
 
- =>BackEnd 구현 기술 : Java / Spring Boot / Mysql <br>
- =>FrontEnd 구현 기술 : Javascript / React
+ => BackEnd 구현 기술 : Java / Spring Boot / Mysql <br>
+ => FrontEnd 구현 기술 : Javascript / React <br>
+ => web3 : HardHat(스마트컨트렉트), Solidity
+ * web3 세팅 방법 : https://velog.io/@dongzooo/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8-web3.0-%EA%B0%9C%EB%B0%9C%EC%9D%84-%EB%8F%84%EC%99%80%EC%A3%BC%EB%8A%94-%EC%84%B8%ED%8C%85-Hardhat
