@@ -1,6 +1,6 @@
 # WEB3.0-Cryptocurrency-transfer
 
-## 1. Overciew
+## 1. Overview
 - Web3.0 환경에서 이더리움을 전송하는 웹사이트
 - 메타마스크를 통해 로그인하고, 암호화폐를 전송함
 
